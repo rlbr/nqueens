@@ -38,13 +38,28 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
     // Problem 7
 
     public static boolean mColorableRec(int i, int n, int[][] W, int m, int[] vcolor) {
-
+        if (colors_check(i + 1, W, vcolor)) {
+            if (i < n) {
+                boolean found = false;
+                for (int color = 1; color <= m; color++) {
+                    vcolor[i + 1] = color;
+                    if (!found)
+                        found = found || mColorableRec(i + 1, n, W, m, vcolor);
+                    else
+                        // only need one solution
+                        return true;
+                }
+                // nothing was found in subcalls
+                return false;
+            }
+        }
+        // base case if vcolor is invalid
+        return false;
     }
-
     // Problem 9 (YOU NEED TO HAVE DONE PROBLEM 8 TO DO PROBLEM 9)
 
     public static boolean fastTwoColor(int n, int[][] W, int[] vcolor) {
-
+        return false;
     }
 
     // ***********************************************************************
