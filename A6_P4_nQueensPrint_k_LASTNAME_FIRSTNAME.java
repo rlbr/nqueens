@@ -11,6 +11,7 @@ public class A6_P4_nQueensPrint_k_LASTNAME_FIRSTNAME {
     // WRITE THIS ONE!
     // helper
     public static boolean check_col(int i, int[] col) {
+        i++;
         for (int x_1 = i; x_1 > 0; x_1--) {
             int y_1 = col[x_1];
             for (int x_2 = x_1 - 1; x_2 > 0; x_1--) {
