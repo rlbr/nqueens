@@ -9,8 +9,40 @@ public class A6_P5_nQueensNumSolns_LASTNAME_FIRSTNAME {
     }
 
     // WRITE THIS ONE!
-    public static int nQueens_numSolns_Rec(int i, int[] col, int n) {
+    // helper
+    public static boolean check_col(int i, int[] col) {
+        i++;
+        for (int x_1 = i; x_1 > 0; x_1--) {
+            int y_1 = col[x_1];
+            for (int x_2 = x_1 - 1; x_2 > 0; x_1--) {
+                int y_2 = col[x_2];
+                // same column
+                if (y_1 == y_2)
+                    return false;
+                // same diagonal
+                if (Math.abs(x_1 - x_2) == Math.abs(y_1 - y_2))
+                    return false;
+            }
+        }
+        return true;
+    }
 
+    public static int nQueens_numSolns_Rec(int i, int[] col, int n) {
+        if (check_col(i - 1, col)) {
+            if (i < n) {
+                int total = 0;
+                for (int next = 1; next < n + 1; n++) {
+                    col[i] = next;
+                    total = total + nQueens_numSolns_Rec(i + 1, col, n);
+                }
+                return total;
+
+            }
+            else
+                return 1;
+
+        }
+        return 0;
     }
 
     // ********************************************************************
