@@ -9,8 +9,37 @@ public class A6_P4_nQueensPrint_k_LASTNAME_FIRSTNAME {
     }
 
     // WRITE THIS ONE!
-    public static void nQueens_Print_k_solns_Rec(int i, int[] col, int n, int k) {
+    // helper
+    public static boolean check_col(int i, int[] col) {
+        for (int x_1 = i; x_1 > 0; x_1--) {
+            int y_1 = col[x_1];
+            for (int x_2 = x_1 - 1; x_2 > 0; x_1--) {
+                int y_2 = col[x_2];
+                // same column
+                if (y_1 == y_2)
+                    return false;
+                // same diagonal
+                if (Math.abs(x_1 - x_2) == Math.abs(y_1 - y_2))
+                    return false;
+            }
+        }
+        return true;
+    }
 
+    public static void nQueens_Print_k_solns_Rec(int i, int[] col, int n, int k) {
+        if (check_col(i - 1, col)) {
+            if (i < n) {
+                for (int next = 1; next < n + 1; n++) {
+                    col[i] = next;
+                    if (col[0] < k)
+                        nQueens_Print_k_solns_Rec(i + 1, col, n, k);
+                }
+            }
+            else {
+                col[0]++;
+                printArray(n, col);
+            }
+        }
     }
 
     // ********************************************************************
