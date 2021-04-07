@@ -14,9 +14,25 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
     // *********************************************************************
 
     // Problem 6:
+    // helper
+    public static boolean colors_check(int k, int[][] W, int[] vcolor) {
+        for (int i = 1; i < k; i++)
+            if ((vcolor[i] == vcolor[k]) && (W[k][i] == 1))
+                return false;
+        return true;
+    }
 
     public static int greedyColoring(int n, int[][] W, int[] vcolor) {
-
+        int max_color = 0;
+        vcolor[1] = 0;
+        int start = 2;
+        for (int i = start; i < n + 1; i++) {
+            vcolor[i] = 0;
+            while (!colors_check(i, W, vcolor))
+                vcolor[i]++;
+            max_color = Math.max(max_color, vcolor[i]);
+        }
+        return max_color;
     }
 
     // Problem 7
