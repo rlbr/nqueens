@@ -24,10 +24,10 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
 
     public static int greedyColoring(int n, int[][] W, int[] vcolor) {
         int max_color = 0;
-        vcolor[1] = 0;
+        vcolor[1] = 1;
         int start = 2;
         for (int i = start; i < n + 1; i++) {
-            vcolor[i] = 0;
+            vcolor[i] = 1;
             while (!colors_check(i, W, vcolor))
                 vcolor[i]++;
             max_color = Math.max(max_color, vcolor[i]);
