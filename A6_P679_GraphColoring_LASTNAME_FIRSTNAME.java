@@ -59,7 +59,28 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
     // Problem 9 (YOU NEED TO HAVE DONE PROBLEM 8 TO DO PROBLEM 9)
 
     public static boolean fastTwoColor(int n, int[][] W, int[] vcolor) {
-        return false;
+        A6_P8_IntQueue_LASTNAME_FIRSTNAME working_queue = new A6_P8_IntQueue_LASTNAME_FIRSTNAME();
+        for (int i = 1; i < n + 1; i++)
+            vcolor[i] = -1;
+        vcolor[1] = 1;
+        working_queue.enqueue(1);
+        int vertex;
+        while (!working_queue.isEmpty()) {
+            vertex = working_queue.dequeue();
+            // invert the color
+            int color = ((vcolor[vertex] + 1) % 2) + 1;
+            for (int i = 1; i < n + 1; i++) {
+                if (W[vertex][i] == 1) {
+                    if (vcolor[i] == -1) {
+                        vcolor[i] = color;
+                        working_queue.enqueue(i);
+                    }
+                    else if (vcolor[i] != color)
+                        return false;
+                }
+            }
+        }
+        return true;
     }
 
     // ***********************************************************************
