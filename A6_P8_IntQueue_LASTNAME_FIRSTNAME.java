@@ -25,7 +25,7 @@ public class A6_P8_IntQueue_LASTNAME_FIRSTNAME {
 
     // instance variables here
 
-    IntNode last;
+    private IntNode last;
 
     public A6_P8_IntQueue_LASTNAME_FIRSTNAME()
     // Constructor
