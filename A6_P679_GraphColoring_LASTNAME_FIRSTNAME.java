@@ -38,20 +38,20 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
     // Problem 7
 
     public static boolean mColorableRec(int i, int n, int[][] W, int m, int[] vcolor) {
-        if (colors_check(i + 1, W, vcolor)) {
+        if (colors_check(i, W, vcolor)) {
             if (i < n) {
-                boolean found = false;
                 for (int color = 1; color <= m; color++) {
                     vcolor[i + 1] = color;
-                    if (!found)
-                        found = found || mColorableRec(i + 1, n, W, m, vcolor);
-                    else
-                        // only need one solution
+                    boolean found = mColorableRec(i + 1, n, W, m, vcolor);
+                    // only need one solution
+                    if (found)
                         return true;
                 }
                 // nothing was found in subcalls
                 return false;
+
             }
+            return true;
         }
         // base case if vcolor is invalid
         return false;
@@ -68,7 +68,12 @@ public class A6_P679_GraphColoring_LASTNAME_FIRSTNAME {
         while (!working_queue.isEmpty()) {
             vertex = working_queue.dequeue();
             // invert the color
-            int color = ((vcolor[vertex] + 1) % 2) + 1;
+            int color;
+            if (vcolor[vertex] == 1)
+                color = 2;
+            else
+                color = 1;
+
             for (int i = 1; i < n + 1; i++) {
                 if (W[vertex][i] == 1) {
                     if (vcolor[i] == -1) {
